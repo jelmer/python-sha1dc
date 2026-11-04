@@ -8,9 +8,18 @@ attack is still reported: finalization raises :class:`Sha1MitigatedError`
 carrying the mitigated digest.
 """
 
-from collections.abc import Buffer
+from __future__ import annotations
+
+import sys
+from typing import TYPE_CHECKING
 
 from ._sha1dc import MitigatedSha1DC, Sha1MitigatedError
+
+if TYPE_CHECKING:
+    if sys.version_info >= (3, 12):
+        from collections.abc import Buffer
+    else:
+        from typing_extensions import Buffer
 
 sha1 = MitigatedSha1DC
 

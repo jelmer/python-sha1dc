@@ -1,5 +1,10 @@
-from collections.abc import Buffer
+import sys
 from typing import final
+
+if sys.version_info >= (3, 12):
+    from collections.abc import Buffer
+else:
+    from typing_extensions import Buffer
 
 digest_size: int
 block_size: int

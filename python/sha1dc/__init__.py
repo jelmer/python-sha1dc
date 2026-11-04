@@ -11,7 +11,10 @@ For a variant that returns a non-standard digest derived from an attack input
 (instead of the colliding one), see :mod:`sha1dc.mitigate`.
 """
 
-from collections.abc import Buffer
+from __future__ import annotations
+
+import sys
+from typing import TYPE_CHECKING
 
 from . import mitigate
 from ._sha1dc import (
@@ -24,6 +27,12 @@ from ._sha1dc import (
     digest_size,
     hexdigest,
 )
+
+if TYPE_CHECKING:
+    if sys.version_info >= (3, 12):
+        from collections.abc import Buffer
+    else:
+        from typing_extensions import Buffer
 
 sha1 = Sha1DC
 
