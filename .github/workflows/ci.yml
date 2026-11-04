@@ -49,6 +49,6 @@ jobs:
         run: maturin build --release --out dist
       - name: Install wheel
         shell: bash
-        run: pip install --no-index --find-links dist sha1dc
+        run: pip install --find-links dist sha1dc
       - name: Run tests
         run: pytest -v tests/
