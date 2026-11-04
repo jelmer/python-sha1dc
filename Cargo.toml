@@ -1,0 +1,16 @@
+[package]
+name = "sha1dc-py"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.87"
+license = "Apache-2.0"
+description = "Python bindings for the sha1dc crate (SHA-1 with collision detection)"
+repository = "https://github.com/jelmer/python-sha1dc"
+
+[lib]
+name = "_sha1dc"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.30", features = ["extension-module", "abi3-py311"] }
+sha1dc = "0.1.5"
