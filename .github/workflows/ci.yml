@@ -20,12 +20,14 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - name: Clippy
         run: cargo clippy --all-targets -- -D warnings
-      - name: Install ruff
-        run: pip install ruff
+      - name: Install Python linters
+        run: pip install ruff mypy
       - name: Ruff format
         run: ruff format --check .
       - name: Ruff check
         run: ruff check .
+      - name: Mypy
+        run: mypy
 
   test:
     strategy:
@@ -43,7 +45,10 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - name: Install test dependencies
         run: pip install pytest maturin
-      - name: Build and install
-        run: maturin develop --release
+      - name: Build wheel
+        run: maturin build --release --out dist
+      - name: Install wheel
+        shell: bash
+        run: pip install --no-index --find-links dist sha1dc
       - name: Run tests
-        run: pytest -v
+        run: pytest -v tests/

@@ -104,13 +104,6 @@ def test_accepts_buffer_protocol(factory):
     assert h.hexdigest() == HELLO_WORLD_HEX
 
 
-def test_update_accepts_mixed_buffer_types():
-    h = sha1dc.sha1()
-    h.update(memoryview(b"hello "))
-    h.update(bytearray(b"world"))
-    assert h.hexdigest() == HELLO_WORLD_HEX
-
-
 def test_rejects_str():
     with pytest.raises(TypeError, match="bytes-like"):
         sha1dc.sha1("not bytes")

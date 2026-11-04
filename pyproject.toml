@@ -23,3 +23,7 @@ Repository = "https://github.com/jelmer/python-sha1dc"
 module-name = "sha1dc._sha1dc"
 python-source = "python"
 features = ["pyo3/extension-module"]
+
+[tool.mypy]
+strict = true
+files = ["python/sha1dc"]
